@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: radial-gradient(circle at top, #2b1055, #000);
+        font-family: 'Segoe UI', sans-serif;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .card {
+        width: 90%;
+        max-width: 420px;
+        background: rgba(0,0,0,0.55);
+        padding: 30px;
+        border-radius: 25px;
+        box-shadow: 0 0 30px rgba(255,0,100,0.3);
+        animation: fadeIn 0.8s ease;
+        position: relative;
+        z-index: 2;
+    }
+
+    @keyframes fadeIn {
+        from {opacity:0; transform:scale(0.9);}
+        to {opacity:1; transform:scale(1);}
+    }
+
+    .corner {
+        position: absolute;
+        font-size: 14px;
+        opacity: 0.8;
+    }
+
+    .top-right { top: 15px; right: 15px; }
+    .bottom-left { bottom: 15px; left: 15px; }
+
+    h2, b, .glow {
+        animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 5px #ff4d6d; }
+        to { text-shadow: 0 0 20px #ff99aa; }
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 12px 28px;
+        font-size: 16px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        background: linear-gradient(135deg,#ff4d6d,#ff1e50);
+        color: white;
+        transition: 0.3s;
+        box-shadow: 0 0 15px rgba(255,0,100,0.5);
+    }
+
+    button:hover {
+        transform: scale(1.08);
+    }
+
+    .btn-group button {
+        margin: 10px;
+    }
+
+    .heart {
+        position: fixed;
+        bottom: -10px;
+        font-size: 20px;
+        animation: float 6s linear infinite;
+        opacity: 0.7;
+    }
+
+    @keyframes float {
+        from { transform: translateY(0); opacity:1;}
+        to { transform: translateY(-110vh); opacity:0;}
+    }
+</style>
+</head>
+
+<body>
+
+<audio id="music" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6c99c4a27c.mp3" type="audio/mpeg">
+</audio>
+
+<div class="corner top-right" id="corner"></div>
+
+<div class="card" id="content"></div>
+
+<script>
+let page = 1;
+
+function nextPage() {
+    page++;
+    render();
+}
+
+function render() {
+    const c = document.getElementById("content");
+    const corner = document.getElementById("corner");
+
+    if (page === 1) {
+        corner.innerText = "👀 upr kone mai dekho";
+        c.innerHTML = `
+        <h2 class="glow">Suno… 💭</h2>
+        <p>mujhe tumse kuch kehna hai 🥺</p>
+        <button onclick="nextPage()">Next ➜</button>`;
+    }
+
+    if (page === 2) {
+        corner.innerText = "👇 niche corner pr dekho";
+        c.innerHTML = `
+        <h2>Woh… 🌙</h2>
+        <p>mujhe kehna tha ki…</p>
+        <button onclick="nextPage()">Next ➜</button>`;
+    }
+
+    if (page === 3) {
+        corner.innerText = "💗 dil se";
+        c.innerHTML = `
+        <p>
+        mai tumse yeh kehna chahta hu 💌<br><br>
+        Tumhare sath mai saari zindagi rehna chahta hu 🌸<br><br>
+        Kya tum mere iss khwab ko sach karne mai sath dogi? ✨
+        </p>
+        <button onclick="nextPage()">Next ➜</button>`;
+    }
+
+    if (page === 4) {
+        corner.innerText = "🤍 sach dil se";
+        c.innerHTML = `
+        <p>
+        mujhe tumse yeh baat bahut din se kehni thi,<br>
+        par samajh nahi aaya kaise kahu… 😔<br><br>
+
+        Main perfect nahi hoon,<br>
+        par tumhari care karna jaanta hoon.<br>
+        Agar tum chaho,<br>
+        toh main woh banda banna chahta hoon<br>
+        jo hamesha tumhare saath khada ho. 🫶
+        </p>
+        <b class="glow">Toh kya tum mera yeh proposal accept karogi? 💍</b><br><br>
+        <span class="glow">I love you, Khushmeen ❤️</span><br><br>
+
+        <div class="btn-group">
+            <button onclick="yes()">Yes 💖</button>
+            <button onclick="no()">No 🙈</button>
+        </div>`;
+    }
+}
+
+function yes() {
+    startHearts();
+    document.getElementById("content").innerHTML = `
+    <h2 class="glow">She said YES 😭❤️</h2>
+    <p>
+    Toh phir yeh kahani yahin se shuru hoti hai… 🌙✨
+    </p>`;
+}
+
+function no() {
+    alert("😔 Koi baat nahi… feelings toh sach thi 💔");
+}
+
+function startHearts() {
+    for (let i = 0; i < 40; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (4 + Math.random()*3) + "s";
+        document.body.appendChild(heart);
+    }
+}
+
+render();
+</script>
+
+</body>
+</html>nhi 
