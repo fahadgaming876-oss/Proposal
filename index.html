@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Year For My Cutu 🧸</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  font-family:'Segoe UI',sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.card{
+  background:rgba(255,255,255,0.92);
+  padding:28px;
+  border-radius:30px;
+  width:90%;
+  max-width:430px;
+  text-align:center;
+  box-shadow:0 0 40px rgba(255,105,180,0.5);
+  animation:pop 0.8s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(0.7); opacity:0;}
+  to{transform:scale(1); opacity:1;}
+}
+
+h1{
+  color:#ff4d6d;
+  font-size:28px;
+}
+
+h2{
+  color:#ff4d6d;
+}
+
+p{
+  color:#444;
+  font-size:16.5px;
+  line-height:1.8;
+}
+
+button{
+  margin-top:18px;
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d6d;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 0 15px #ff4d6d;
+}
+
+.heart{
+  position:absolute;
+  font-size:20px;
+  animation:float 4s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh); opacity:1;}
+  to{transform:translateY(-10vh); opacity:0;}
+}
+
+#countdown{
+  font-size:26px;
+  color:#ff4d6d;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="content">
+  <h1>🎆 New Year Countdown 🎆</h1>
+  <p>mere cutu bacha 🧸<br>thoda sa intezaar karo…</p>
+  <div id="countdown">Loading...</div>
+</div>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const newYear = new Date("January 1, 2026 00:00:00").getTime();
+const countdownEl = document.getElementById("countdown");
+const content = document.getElementById("content");
+const music = document.getElementById("music");
+
+let countdownTimer = setInterval(() => {
+  let now = new Date().getTime();
+  let distance = newYear - now;
+
+  if (distance < 0) {
+    clearInterval(countdownTimer);
+    showWish();
+  } else {
+    let d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let s = Math.floor((distance % (1000 * 60)) / 1000);
+    countdownEl.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+  }
+}, 1000);
+
+function showWish(){
+  music.volume = 0.6;
+  music.play();
+  hearts();
+
+  content.innerHTML = `
+  <h1>🎉 Happy New Year 🥹❤️</h1>
+  <p>
+    Mere cutu bacha 🧸,<br><br>
+    tum iss saal ke bilkul end me meri zindagi me aaye,<br>
+    jaise saal ka sabse pyaara surprise 🎁<br><br>
+    shayad thoda late…<br>
+    par bilkul sahi waqt par 🤍
+  </p>
+  <button onclick="next1()">Next ➜</button>
+  `;
+}
+
+function next1(){
+  content.innerHTML = `
+  <p>
+    naye saal me meri yahi dua hai,<br>
+    tumhari har subah muskurahat se shuru ho,<br>
+    aur har raat sukoon par khatam ✨<br><br>
+    kam tension lo,<br>
+    zyada khush raho,<br>
+    aur apni cutu si smile kabhi khona mat 🧸
+  </p>
+  <button onclick="next2()">Next ➜</button>
+  `;
+}
+
+function next2(){
+  hearts();
+  content.innerHTML = `
+  <p>
+    agar kabhi tum thak jao,<br>
+    ya duniya thodi heavy lage,<br>
+    toh yaad rakhna…<br>
+    koi hai jo har haal me tumhare saath khada hai 🤍
+  </p>
+  <button onclick="final()">Final 💖</button>
+  `;
+}
+
+function final(){
+  hearts();
+  content.innerHTML = `
+  <h2>✨ Welcome 2026 ✨</h2>
+  <p>
+    iss naye saal me bhi,<br>
+    main tumhara haath thaam kar chalna chahta hoon.<br><br>
+    hamesha mere cutu bacha rehna 🥹💕
+  </p>
+  <h2>I Love You 🫶</h2>
+  `;
+}
+
+function hearts(){
+  for(let i=0;i<25;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"%";
+    h.style.animationDuration=(3+Math.random()*3)+"s";
+    document.body.appendChild(h);
+  }
+}
+</script>
+
+</body>
+</html>
